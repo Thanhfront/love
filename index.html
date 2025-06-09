@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Chữ rớt xuống đẹp</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      overflow: hidden;
+      height: 100vh;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .falling-text {
+      position: absolute;
+      top: -50px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #ff00cc;
+      animation: fall linear infinite;
+      white-space: nowrap;
+      opacity: 0.9;
+      text-shadow: 0 0 10px #ff00cc, 0 0 20px #ff66ff, 0 0 30px #ff99ff;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      30% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  const messages = [
+    "Tôi yêu bạn 💖",
+    "Tôi rất thích bạn 😍",
+    "Bạn thật tuyệt vời 🌟",
+    "Chúc bạn một ngày vui vẻ ☀️",
+    "Bạn là người đặc biệt 💫",
+    "Luôn mỉm cười nhé 😊",
+    "Tôi nhớ bạn nhiều lắm 🥺"
+  ];
+
+  function createFallingMessage() {
+    const span = document.createElement('span');
+    span.classList.add('falling-text');
+    span.textContent = messages[Math.floor(Math.random() * messages.length)];
+    span.style.left = Math.random() * window.innerWidth + 'px';
+    span.style.animationDuration = (Math.random() * 3 + 4) + 's'; // tốc độ rơi khác nhau
+
+    document.body.appendChild(span);
+
+    // Xóa sau khi rơi xong
+    setTimeout(() => {
+      span.remove();
+    }, 7000);
+  }
+
+  setInterval(createFallingMessage, 400); // tốc độ xuất hiện
+</script>
+
+</body>
+</html>
