@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <title> Nice </title>
+  <meta charset="UTF-8" />
+  <title> Siuuuuuuuu </title>
   <style>
     body {
       margin: 0;
@@ -10,18 +10,37 @@
       overflow: hidden;
       height: 100vh;
       font-family: 'Arial', sans-serif;
+      position: relative;
     }
 
     .falling-text {
       position: absolute;
       top: -50px;
-      font-size: 28px;
-      font-weight: bold;
-      color: #ff00cc;
-      animation: fall linear infinite;
       white-space: nowrap;
-      opacity: 0.9;
+      font-weight: bold;
+      font-size: 28px;
+      color: #ff00cc;
       text-shadow: 0 0 10px #ff00cc, 0 0 20px #ff66ff, 0 0 30px #ff99ff;
+      animation-name: fall;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      opacity: 0.9;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .falling-image {
+      position: absolute;
+      top: -50px;
+      width: 200px;
+      height: 200px;
+      filter: drop-shadow(0 0 5px #ff00cc);
+      animation-name: fall;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      opacity: 0.5;
+      user-select: none;
+      pointer-events: none;
     }
 
     @keyframes fall {
@@ -41,33 +60,67 @@
 </head>
 <body>
 
+<!-- Nhạc nền YouTube ẩn -->
+<iframe width="1" height="1"
+  src="https://www.youtube.com/embed/ABOFJBxgePw?start=56&autoplay=1&loop=1&playlist=ABOFJBxgePw&controls=0&mute=0"
+  frameborder="0"
+  allow="autoplay"
+  style="opacity:0;pointer-events:none;">
+</iframe>
+
 <script>
   const messages = [
-    "Tôi yêu bạn 💖",
-    "Tôi rất thích bạn 😍",
-    "Bạn thật tuyệt vời 🌟",
-    "Chúc bạn một ngày vui vẻ ☀️",
-    "Bạn là người đặc biệt 💫",
-    "Luôn mỉm cười nhé 😊",
-    "Tôi nhớ bạn nhiều lắm 🥺"
+  "Sẽ có người tốt hơn sẽ đến với em",
+  "Phải thật hạnh phúc nhé",
+  "Đừng khóc quá nhiều nhé",
+  "Em luôn đẹp mỗi khi cười ^^"
   ];
 
-  function createFallingMessage() {
-    const span = document.createElement('span');
-    span.classList.add('falling-text');
-    span.textContent = messages[Math.floor(Math.random() * messages.length)];
-    span.style.left = Math.random() * window.innerWidth + 'px';
-    span.style.animationDuration = (Math.random() * 3 + 4) + 's'; // tốc độ rơi khác nhau
+  function createFallingText() {
+    const text = document.createElement('div');
+    text.classList.add('falling-text');
 
-    document.body.appendChild(span);
+    const msg = messages[Math.floor(Math.random() * messages.length)];
+    text.textContent = msg;
 
-    // Xóa sau khi rơi xong
+    text.style.left = Math.random() * (window.innerWidth - 200) + 'px';
+    text.style.animationDuration = (Math.random() * 3 + 4) + 's';
+
+    document.body.appendChild(text);
+
     setTimeout(() => {
-      span.remove();
+      text.remove();
     }, 7000);
   }
 
-  setInterval(createFallingMessage, 400); // tốc độ xuất hiện
+  function createFallingImage() {
+    const img = document.createElement('img');
+    img.classList.add('falling-image');
+
+    const images = [
+      'thanh.jpg',
+      'thanh1.jpg',
+      'datt.jpg',
+      'dat.jpg'
+    ];
+
+    img.src = images[Math.floor(Math.random() * images.length)];
+    img.alt = "icon";
+
+    img.style.left = Math.random() * (window.innerWidth - 200) + 'px';
+
+    const duration = Math.random() * 5 + 6;  // 3 đến 4 ss
+    img.style.animationDuration = duration + 's';
+
+    document.body.appendChild(img);
+
+    setTimeout(() => {
+      img.remove();
+    }, (duration + 0.5) * 1000);
+  }
+
+  setInterval(createFallingText, 1000);
+  setInterval(createFallingImage, 3000);  // Tạo ảnh rơi mỗi 2 giây, ít hơn trước
 </script>
 
 </body>
